@@ -13,6 +13,8 @@ public class HelloWorld {
         System.out.println(myString);
 
         // TODO 3: Change your code to assign a character value to myString. What do you notice?
+        myString += 'c';
+        System.out.println(myString);
         // TODO 4: Change your code to assign the value 3.14159 to myString. What happens?
         // TODO 5: Declare an long variable named myNumber, but do not assign anything to it. Next try to print out myNumber to the console. What happens?
         // TODO 6: Change your code to assign the value 3.14 to myNumber. What do you notice?
