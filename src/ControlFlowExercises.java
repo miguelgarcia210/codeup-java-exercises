@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class ControlFlowExercises {
     public static void main(String[] args) {
 //        byte i = 5;
@@ -47,16 +49,46 @@ public class ControlFlowExercises {
 //        }
 
         // TODO: FIZZ-BUZZ
-        for (byte i = 1; i <= 100; i++) {
-            if (i % 15 == 0) {
-                System.out.println("FizzBuzz");
-            } else if (i % 3 == 0) {
-                System.out.println("Fizz");
-            } else if (i % 5 == 0) {
-                System.out.println("Buzz");
-            } else {
-                System.out.println(i);
-            }
+//        for (byte i = 1; i <= 100; i++) {
+//            if (i % 15 == 0) {
+//                System.out.println("FizzBuzz");
+//            } else if (i % 3 == 0) {
+//                System.out.println("Fizz");
+//            } else if (i % 5 == 0) {
+//                System.out.println("Buzz");
+//            } else {
+//                System.out.println(i);
+//            }
+//        }
+
+        // TODO: Display of Powers
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter an integer.");
+        int userInput = scanner.nextInt();
+
+        System.out.println("Here is your table!");
+
+        System.out.println(" number |  squared  | cubed");
+        System.out.println(" ------ |  -------- | -----");
+
+
+        for (int i = 1; i <= userInput; i++) {
+            System.out.printf(" %s\t\t|  %s\t\t| %s\n", i, (long) (i * i), (long) ((i * i) * i));
+        }
+
+        System.out.println("Would you like to continue? (y/n)");
+        String userResponse = scanner.next();
+        switch (userResponse.toLowerCase()) {
+            case "y":
+            case "yes":
+                System.out.println("Let's continue.");
+                break;
+            case "n":
+            case "no":
+                System.out.println("Stopping here.");
+                break;
+            default:
+                System.out.println("Value entered not 'y' or 'n'.");
         }
     }
 }
