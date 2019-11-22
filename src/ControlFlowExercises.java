@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class ControlFlowExercises {
     public static void main(String[] args) {
 //        byte i = 5;
@@ -42,8 +44,82 @@ public class ControlFlowExercises {
 //            System.out.println(i);
 //        }
 
-        for (long i = 2; i < 1000000; i *= i) {
-            System.out.println(i);
+//        for (long i = 2; i < 1000000; i *= i) {
+//            System.out.println(i);
+//        }
+
+        // TODO: FIZZ-BUZZ
+//        for (byte i = 1; i <= 100; i++) {
+//            if (i % 15 == 0) {
+//                System.out.println("FizzBuzz");
+//            } else if (i % 3 == 0) {
+//                System.out.println("Fizz");
+//            } else if (i % 5 == 0) {
+//                System.out.println("Buzz");
+//            } else {
+//                System.out.println(i);
+//            }
+//        }
+
+        // TODO: Display of Powers
+        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter an integer.");
+//        int userInput = scanner.nextInt();
+//
+//        System.out.println("Here is your table!");
+//
+//        System.out.println(" number |  squared  | cubed");
+//        System.out.println(" ------ |  -------- | -----");
+//
+//
+//        for (int i = 1; i <= userInput; i++) {
+//            System.out.printf(" %s\t\t|  %s\t\t| %s\n", i, (long) (i * i), (long) ((i * i) * i));
+//        }
+//
+
+        // TODO: Refactor to perform the grading function first then ask to continue.
+        boolean exit = false;
+        boolean forward = false;
+
+        System.out.println("Would you like to continue? (y/n)");
+        while (!exit) {
+            String userResponse = scanner.next();
+
+            switch (userResponse.toLowerCase()) {
+                case "y":
+                case "yes":
+                    System.out.println("Let's continue.");
+                    forward = true;
+                    exit = true;
+                    break;
+                case "n":
+                case "no":
+                    System.out.println("Stopping here.");
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Value entered not 'y' or 'n'.");
+                    System.out.println("Continue? (y/n)");
+            }
+        }
+
+        if (forward) {
+            System.out.println("Enter a grade between 0-100");
+            byte grade = scanner.nextByte();
+
+            if (grade >= 88 && grade <= 100) {
+                System.out.println("Grade: A");
+            } else if (grade >= 80 && grade <= 87) {
+                System.out.println("Grade: B");
+            } else if (grade >= 67 && grade <= 79) {
+                System.out.println("Grade: C");
+            } else if (grade >= 60 && grade <= 66) {
+                System.out.println("Grade: D");
+            } else if (grade >= 0 && grade <= 59) {
+                System.out.println("Grade: F");
+            } else {
+                System.out.println("Invalid grade entry.");
+            }
         }
     }
 }
