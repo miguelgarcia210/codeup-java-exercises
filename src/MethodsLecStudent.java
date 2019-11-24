@@ -7,9 +7,9 @@ public class MethodsLecStudent {
     prints the message "I would like fries please."
  */
 
-public static void orderFood() {
-    System.out.println("I would like fries please!");
-}
+    public static void orderFood() {
+        System.out.println("I would like fries please!");
+    }
 
 /*
     TO DO: Create a main method in this class. Use it to call your
@@ -20,22 +20,22 @@ public static void orderFood() {
 //    orderFood();
 //}
 
-/*
-    TO DO: Write a public static method called favoriteSong that prints
-    your favorite song.
- */
-public static void favoriteSongs() {
-    System.out.println("Jenny was a friend of mine - The Killers");
-}
+    /*
+        TO DO: Write a public static method called favoriteSong that prints
+        your favorite song.
+     */
+    public static void favoriteSongs() {
+        System.out.println("Jenny was a friend of mine - The Killers");
+    }
 
 /*
     TO DO: Write a public static method called weeksIn that prints
     message saying how many weeks you've been at Codeup.
  */
 
-public static void weeksIn() {
-    System.out.println("10 weeks!");
-}
+    public static void weeksIn() {
+        System.out.println("10 weeks!");
+    }
 
 
 //  METHOD OVERLOADING
@@ -46,9 +46,9 @@ public static void weeksIn() {
     ordering.
  */
 
-public static void orderFood(String food) {
-    System.out.printf("I would like %s please!\n", food);
-}
+    public static void orderFood(String food) {
+        System.out.printf("I would like %s please!\n", food);
+    }
 
 /*
     TO DO: Overload orderFood again. Create a version that takes in two
@@ -57,9 +57,9 @@ public static void orderFood(String food) {
     message using these arguments.
  */
 
-public static void orderFood(String food, int quantity) {
-    System.out.printf("I would like %d %s\n", quantity, food);
-}
+    public static void orderFood(String food, int quantity) {
+        System.out.printf("I would like %d %s\n", quantity, food);
+    }
 
 /*
     TO DO TOGETHER: We'll overload orderFood again. We'll still have two
@@ -68,9 +68,9 @@ public static void orderFood(String food, int quantity) {
     new message reflecting the change.
  */
 
-public static void orderFood(String item1, String item2) {
-    System.out.printf("I would like %s and %s%n", item1, item2);
-}
+    public static void orderFood(String item1, String item2) {
+        System.out.printf("I would like %s and %s%n", item1, item2);
+    }
 
 
 //  RECURSION
