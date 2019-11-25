@@ -107,6 +107,7 @@ public class ControlFlowExercises {
             System.out.println("Enter a grade between 0-100");
             byte grade = scanner.nextByte();
 
+            // TODO - BONUS: Edit your grade ranges to include pluses and minuses (ex: 99-100 = A+).
             if (grade >= 88 && grade <= 100) {
                 System.out.println("Grade: A");
             } else if (grade >= 80 && grade <= 87) {
