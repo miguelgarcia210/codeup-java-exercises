@@ -2,34 +2,65 @@ import java.util.Scanner;
 
 public class HighLow {
 
-    /*
-    Game picks a random number between 1 and 100.
-Prompts user to guess the number.
-All user inputs are validated.
-If user's guess is less than the number, it outputs "HIGHER".
-If user's guess is more than the number, it outputs "LOWER".
-If a user guesses the number, the game should declare "GOOD GUESS!"
+/*
+    TODO:
+     Set an upper limit on the number of guesses.
+*/
 
-Keep track of how many guesses a user makes.
-Set an upper limit on the number of guesses.
-     */
     public static void hiLow() {
         Scanner scanner = new Scanner(System.in);
         int userGuesses = 0;
-        int guessLimit;
+        int guessLimit = 20;
         int dealerNumber = (int) (Math.random() * (100 - 1 + 1)) + 1;
 
-        System.out.println("Welcome to the club!");
-        System.out.println("Let's get started. The game is High-Low");
-        System.out.println("Take a guess...");
-
+        System.out.println("~~~ High Low ~~~");
+        System.out.println("Dealer: Take a guess...");
         int userInput = scanner.nextInt();
 
-        if (userInput <= 0 || userInput > 100) {
-            System.out.println("Guess must be between 1 and 100!");
-            hiLow();
-        }
+        boolean exit = false;
+        while (!exit) {
+            if (userInput <= 0 || userInput > 100) {
+                System.out.println("Guess must be between 1 and 100!");
+                userGuesses++;
+            } else if (userInput < dealerNumber) {
+                System.out.println("HIGHER");
+                userGuesses++;
+                userInput = scanner.nextInt();
+            } else if (userInput > dealerNumber) {
+                System.out.println("LOWER");
+                userGuesses++;
+                userInput = scanner.nextInt();
+            } else if (userInput == dealerNumber) {
+                userGuesses++;
+                System.out.println("GOOD GUESS");
+                System.out.printf("Game Stats:%nGuesses: %s%n", userGuesses);
 
+                System.out.println("Would you like to play again? (y/n)");
+                String userResponse = scanner.next();
+//                userResponse = scanner.nextLine();
+
+                boolean playAgain = false;
+                while (!playAgain) {
+                    switch (userResponse.toLowerCase()) {
+                        case "y":
+                        case "yes":
+                            exit = true;
+                            playAgain = true;
+                            hiLow();
+                            break;
+                        case "n":
+                        case "no":
+                            exit = true;
+                            playAgain = true;
+                            System.out.println("Good game! Bye for now.");
+                            break;
+                        default:
+                            System.out.println("Sorry, did not catch that. Continue? (y/n)");
+                            userResponse = scanner.nextLine();
+                    }
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
