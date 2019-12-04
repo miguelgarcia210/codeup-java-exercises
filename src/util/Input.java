@@ -10,6 +10,7 @@ public class Input {
     public String getString() {
         return scanner.nextLine();
     }
+
     public String getString(String prompt) {
         System.out.println(prompt);
         return getString();
@@ -20,6 +21,7 @@ public class Input {
         String input = getString();
         return input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y");
     }
+
     public boolean yesNo(String prompt) {
         System.out.println(prompt);
         return yesNo();
@@ -31,7 +33,7 @@ public class Input {
         if (userNumber < min) {
             System.out.println("Number entered is below the minimum.");
             return getInt(min, max);
-        } else if (userNumber > max){
+        } else if (userNumber > max) {
             System.out.println("Number entered is above the maximum.");
             return getInt(min, max);
         }
@@ -48,7 +50,7 @@ public class Input {
 
     public int getInt(String prompt) {
         System.out.println(prompt);
-        return getInt(5,10);
+        return getInt(5, 10);
     }
 
     public double getDouble(double min, double max) {
@@ -57,7 +59,7 @@ public class Input {
         if (userNumber < min) {
             System.out.println("Number entered is below the minimum.");
             return getDouble(min, max);
-        } else if (userNumber > max){
+        } else if (userNumber > max) {
             System.out.println("Number entered is above the maximum.");
             return getDouble(min, max);
         }
@@ -65,14 +67,14 @@ public class Input {
         return userNumber;
     }
 
-    public double getDouble(){
+    public double getDouble() {
         System.out.println("Enter a number below.");
         return Double.parseDouble(getString());
     }
 
     public double getDouble(String prompt) {
         System.out.println(prompt);
-        return getDouble(5,10);
+        return getDouble(5, 10);
     }
 
     public static void main(String[] args) {
