@@ -32,10 +32,6 @@ public class MoviesApplication {
         System.out.println();
     }
 
-//    private static Movie addMovie() {
-//
-//    }
-
     private static void displayMovies(int option) {
         switch (option) {
             case 1:
@@ -59,6 +55,15 @@ public class MoviesApplication {
                 System.out.println("displayMovies method broke!");
         }
     }
+
+//    private static Movie addMovie(Movie movie) {
+//        String movieName = input.getString("Enter movie name.");
+//        if (movieName.equals("") || movieName.startsWith(" ")){
+//
+//        };
+//        Movie[] newMovieArr = Arrays.copyOf(MoviesArray.findAll(),MoviesArray.findAll().length + 1);
+//        newMovieArr[newMovieArr.length] = movie;
+//    }
 
     private static void runSearch() {
         displayOptions(); // Display selection options to the user
