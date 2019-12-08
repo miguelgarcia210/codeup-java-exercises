@@ -2,8 +2,6 @@ package movies;
 
 import util.Input;
 
-import java.util.Arrays;
-
 public class MoviesApplication {
     private static Input input = new Input();
 
@@ -23,19 +21,13 @@ public class MoviesApplication {
         return input.getInt(0, 5);
     }
 
-    private static void searchCategory(String categoryName) {
-        for (Movie movie : MoviesArray.findAll()) {
-            if (movie.getCategory().equalsIgnoreCase(categoryName)) {
-                System.out.printf("%s -- %s%n", movie.getName(), movie.getCategory());
-            }
-        }
-        System.out.println();
-    }
-
-    private static void displayMovies(int option) {
+    private static void userSelection(int option) {
         switch (option) {
+            case 0:
+                System.out.println("Goodbye!");
+                break;
             case 1:
-                System.out.println(Arrays.toString(MoviesArray.findAll()));
+                displayAllMovies();
                 break;
             case 2:
                 searchCategory("animated");
@@ -48,26 +40,35 @@ public class MoviesApplication {
                 break;
             case 5:
                 searchCategory("scifi");
-            case 6:
-                // TODO: Create method to allow addition to movie list
                 break;
             default:
                 System.out.println("displayMovies method broke!");
+                break;
         }
     }
 
-//    private static Movie addMovie(Movie movie) {
-//        String movieName = input.getString("Enter movie name.");
-//        if (movieName.equals("") || movieName.startsWith(" ")){
-//
-//        };
-//        Movie[] newMovieArr = Arrays.copyOf(MoviesArray.findAll(),MoviesArray.findAll().length + 1);
-//        newMovieArr[newMovieArr.length] = movie;
-//    }
+    private static Movie[] getAllMovies() { //
+        return MoviesArray.findAll();
+    }
+
+    private static void displayAllMovies() {
+        for (Movie movie : getAllMovies()) {
+            System.out.printf("%s -- %s%n", movie.getName(), movie.getCategory());
+        }
+    }
+
+    private static void searchCategory(String categoryName) {
+        for (Movie movie : getAllMovies()) {
+            if (movie.getCategory().equalsIgnoreCase(categoryName)) {
+                System.out.printf("%s -- %s%n", movie.getName(), movie.getCategory());
+            }
+        }
+        System.out.println();
+    }
 
     private static void runSearch() {
         displayOptions(); // Display selection options to the user
-        displayMovies(selectOption()); // Pass user's selected option into displayMovies
+        userSelection(selectOption()); // Pass user's selected option into displayMovies
     }
 
     public static void main(String[] args) {
