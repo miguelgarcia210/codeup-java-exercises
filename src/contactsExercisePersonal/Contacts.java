@@ -149,14 +149,32 @@ public class Contacts {
             }
             if (!contactExists) {
                 System.out.printf("No contact was found with that information.%n");
-                System.out.printf("Would you like to search again?%n");
-                String userResponse = scanner.next();
-                if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
-                    searchContacts();
-                } else {
-                    runProgram();
-                }
+                deleteContinue();
+//                System.out.printf("Would you like to search again? (y/n)%n");
+//                String userResponse = scanner.next();
+//                if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
+//                    searchContacts();
+//                } else if (userResponse.equalsIgnoreCase("n") || userResponse.equalsIgnoreCase("no")) {
+//                    runProgram();
+//                }
+//                else {
+//                    System.out.println("Sorry did not catch that.");
+//
+//                }
             }
+        }
+    }
+
+    public static void deleteContinue() {
+        System.out.printf("Would you like to search again? (y/n)%n");
+        String userResponse = scanner.next();
+        if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
+            searchContacts();
+        } else if (userResponse.equalsIgnoreCase("n") || userResponse.equalsIgnoreCase("no")) {
+            runProgram();
+        } else {
+            System.out.println("Sorry did not catch that.");
+            deleteContinue();
         }
     }
 
@@ -184,7 +202,7 @@ public class Contacts {
             }
             if (!contactExists) { // first check if contact exists
                 System.out.printf("No contact was found with that information.%n");
-                System.out.printf("Would you like to search again?%n");
+                System.out.printf("Would you like to search again? (y/n)%n");
                 String userResponse = scanner.next();
                 if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
                     deleteContact();
@@ -271,8 +289,11 @@ public class Contacts {
         String userResponse = scanner.next();
         if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
             runProgram();
-        } else {
+        } else if (userResponse.equalsIgnoreCase("n") || userResponse.equalsIgnoreCase("no")) {
             run = false;
+        } else {
+            System.out.println("Sorry did not catch that.");
+            confirm();
         }
     }
 
