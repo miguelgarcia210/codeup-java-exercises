@@ -150,19 +150,14 @@ public class Contacts {
             if (!contactExists) {
                 System.out.printf("No contact was found with that information.%n");
                 deleteContinue();
-//                System.out.printf("Would you like to search again? (y/n)%n");
-//                String userResponse = scanner.next();
-//                if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
-//                    searchContacts();
-//                } else if (userResponse.equalsIgnoreCase("n") || userResponse.equalsIgnoreCase("no")) {
-//                    runProgram();
-//                }
-//                else {
-//                    System.out.println("Sorry did not catch that.");
-//
-//                }
             }
         }
+    }
+
+    public static boolean search(Person contact, String search) {
+        if (contact.getName().toLowerCase().contains(search)) {
+            return true;
+        } else return contact.getPhoneNumber().contains(search);
     }
 
     public static void deleteContinue() {
@@ -178,10 +173,23 @@ public class Contacts {
         }
     }
 
-    public static boolean search(Person contact, String search) {
-        if (contact.getName().toLowerCase().contains(search)) {
-            return true;
-        } else return contact.getPhoneNumber().contains(search);
+    public static void deleteSearch() {
+        System.out.printf("Would you like to search again? (y/n)%n");
+        String userResponse = scanner.next();
+        if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
+            deleteContact();
+        } else if (userResponse.equalsIgnoreCase("n") || userResponse.equalsIgnoreCase("no")) {
+            runProgram();
+        } else {
+            System.out.println("Sorry did not catch that.");
+            deleteSearch();
+        }
+    }
+
+    public static boolean deleteConfirm(Person contact) { // confirm to delete contact
+        System.out.printf("Delete %s? (y/n)%n", formatWriteContact(contact));
+        String response = scanner.next();
+        return response.equalsIgnoreCase("y") || response.equalsIgnoreCase("yes");
     }
 
     public static void deleteContact() {
@@ -200,21 +208,15 @@ public class Contacts {
                     contactExists = true;
                 }
             }
-            if (!contactExists) { // first check if contact exists
+            if (!contactExists) { // first check if contact exists // make recursive
                 System.out.printf("No contact was found with that information.%n");
-                System.out.printf("Would you like to search again? (y/n)%n");
-                String userResponse = scanner.next();
-                if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
-                    deleteContact();
-                } else {
-                    runProgram();
-                }
+                deleteSearch();
             }
             if (temp.size() == 1) { // if only one contact was found
                 if (deleteConfirm(allContacts.get(temp.get(0)))) {
-                    System.out.println(allContacts);
+//                    System.out.println(allContacts);
                     allContacts.remove(temp.get(0).intValue());
-                    System.out.println(allContacts);
+//                    System.out.println(allContacts);
                     try {
                         Files.writeString(path, ""); // clear existing .txt file
                         for (Person contact : allContacts) {
@@ -226,7 +228,7 @@ public class Contacts {
                 } else {
                     runProgram();
                 }
-            } else {
+            } else if (temp.size() > 1) {
                 int userSelected = isolateContact(temp);
                 if (deleteConfirm(allContacts.get(temp.get(userSelected)))) {
                     allContacts.remove(temp.get(userSelected).intValue());
@@ -245,7 +247,7 @@ public class Contacts {
         }
     }
 
-    public static int isolateContact(ArrayList<Integer> indices) {
+    public static int isolateContact(ArrayList<Integer> indices) { // isolate the exact contact to delete
         System.out.printf("Select contact to delete. 1-%d%n", indices.size());
         int y = 0;
         for (int i = 0; i < indices.size(); i++) {
@@ -259,12 +261,6 @@ public class Contacts {
         } else {
             return selection - 1;
         }
-    }
-
-    public static boolean deleteConfirm(Person contact) {
-        System.out.printf("Delete %s? (y/n)%n", formatWriteContact(contact));
-        String response = scanner.next();
-        return response.equalsIgnoreCase("y") || response.equalsIgnoreCase("yes");
     }
 
     public static void checkFiles() {
