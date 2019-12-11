@@ -33,14 +33,30 @@ public class Contacts {
         System.out.println("5: exit");
     }
 
-    public static int optionChecker() {
-        int selectedOption = Integer.parseInt(scanner.next());
+    public static int isInteger(String something) {
+        try {
+            return Integer.parseInt(something);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 
-        if (selectedOption < 1 || selectedOption > 5) {
-            System.out.printf("Option not available%nPlease select an option between 1-5");
-            return optionChecker();
+    public static int optionChecker() {
+        String number = scanner.nextLine();
+        int option = isInteger(number);
+
+        if (option >= 1) {
+            if (option <= 5) {
+                return option;
+            } else {
+                System.out.printf("Option not available.%nPlease select an option between 1-5%n");
+                scanner.nextLine();
+                return optionChecker();
+            }
         } else {
-            return selectedOption;
+            System.out.printf("Sorry did not catch that.%n");
+            System.out.printf("Please select an option between 1-5.%n");
+            return optionChecker();
         }
     }
 
@@ -108,7 +124,7 @@ public class Contacts {
     // ----- create contact -----
     public static Person createContact() {
         System.out.println("Enter a name");
-        scanner.nextLine();
+//        scanner.nextLine();
         String name = scanner.nextLine();
         System.out.println("Enter a phone number");
         String phoneNumber = scanner.next();
@@ -125,7 +141,6 @@ public class Contacts {
             e.printStackTrace();
         }
         System.out.printf("Added (Name: %s Phone: %s)%n", person.getName(), person.getPhoneNumber());
-
     }
 
     public static String formatWriteContact(Person contact) { // formats person object to display properly
@@ -139,7 +154,7 @@ public class Contacts {
         } else {
             contactExists = false;
             System.out.println("Search by name or phone number.");
-            String search = scanner.next().trim().toLowerCase();
+            String search = scanner.nextLine().trim().toLowerCase();
             formatPulledContacts(); // formats and adds pulled contacts to allContacts list
             for (Person contact : allContacts) { // TODO: make its own method
                 if (search(contact, search)) {
@@ -162,7 +177,7 @@ public class Contacts {
 
     public static void deleteContinue() {
         System.out.printf("Would you like to search again? (y/n)%n");
-        String userResponse = scanner.next();
+        String userResponse = scanner.nextLine();
         if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
             searchContacts();
         } else if (userResponse.equalsIgnoreCase("n") || userResponse.equalsIgnoreCase("no")) {
@@ -175,7 +190,7 @@ public class Contacts {
 
     public static void deleteSearch() {
         System.out.printf("Would you like to search again? (y/n)%n");
-        String userResponse = scanner.next();
+        String userResponse = scanner.nextLine();
         if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
             deleteContact();
         } else if (userResponse.equalsIgnoreCase("n") || userResponse.equalsIgnoreCase("no")) {
@@ -188,7 +203,7 @@ public class Contacts {
 
     public static boolean deleteConfirm(Person contact) { // confirm to delete contact
         System.out.printf("Delete %s? (y/n)%n", formatWriteContact(contact));
-        String response = scanner.next();
+        String response = scanner.nextLine();
         return response.equalsIgnoreCase("y") || response.equalsIgnoreCase("yes");
     }
 
@@ -199,7 +214,7 @@ public class Contacts {
         } else {
             contactExists = false; // reset static variable
             System.out.println("Search by name or phone number.");
-            String search = scanner.next().trim().toLowerCase();
+            String search = scanner.nextLine().trim().toLowerCase();
             formatPulledContacts(); // add pulled contacts into a static manipulable variable
             ArrayList<Integer> temp = new ArrayList<>(); // method temporary list of search result indices
             for (Person contact : allContacts) {
@@ -249,17 +264,23 @@ public class Contacts {
 
     public static int isolateContact(ArrayList<Integer> indices) { // isolate the exact contact to delete
         System.out.printf("Select contact to delete. 1-%d%n", indices.size());
-        int y = 0;
         for (int i = 0; i < indices.size(); i++) {
-            y++;
-            System.out.printf("%d: %s%n", y, formatWriteContact(allContacts.get(indices.get(i))));
+            System.out.printf("%d: %s%n", i + 1, formatWriteContact(allContacts.get(indices.get(i))));
         }
-        int selection = scanner.nextInt();
-        if (selection < 1 || selection > indices.size()) {
-            System.out.println("Not a valid selection");
-            return isolateContact(indices);
+
+        String number = scanner.nextLine();
+        int selection1 = isInteger(number);
+
+        if (selection1 >= 1) {
+            if (selection1 <= indices.size()) {
+                return selection1 - 1;
+            } else {
+                System.out.println("Not a valid selection");
+                return isolateContact(indices);
+            }
         } else {
-            return selection - 1;
+            System.out.printf("Sorry did not catch that.%n");
+            return isolateContact(indices);
         }
     }
 
@@ -283,6 +304,7 @@ public class Contacts {
     public static void confirm() {
         System.out.println("Would you like to continue? (y/n)");
         String userResponse = scanner.next();
+        scanner.nextLine(); // clear out scanner for optionChecker scanner that is 'SCANNER.NEXTLINE()'
         if (userResponse.equalsIgnoreCase("y") || userResponse.equalsIgnoreCase("yes")) {
             runProgram();
         } else if (userResponse.equalsIgnoreCase("n") || userResponse.equalsIgnoreCase("no")) {
@@ -296,7 +318,6 @@ public class Contacts {
     public static void runProgram() {
         displayMenu();
         optionSelected(optionChecker());
-
     }
 
     public static void main(String[] args) {
